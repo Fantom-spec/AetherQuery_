@@ -1,0 +1,17 @@
+from pydantic import BaseModel, Field
+
+
+class ExecuteRequest(BaseModel):
+    query: str = Field(..., min_length=1)
+    mode: str = Field(default="exact")
+    source: str = Field(default="duckdb")
+
+
+class PlanRequest(BaseModel):
+    query: str = Field(..., min_length=1)
+    source: str = Field(default="duckdb")
+
+
+class UploadResponse(BaseModel):
+    table_name: str
+    path: str

@@ -1,0 +1,47 @@
+# AetherQuery
+
+Unified backend for exact and approximate SQL execution, plan parsing, and plan matching.
+
+## Structure
+
+- backend: FastAPI backend with modular engines and APIs
+- frontend: existing UI (copied from legacy AetherQuery)
+- datasets: uploaded CSV files and local DuckDB file
+- experiments: run artifacts
+- oldcodes: read-only reference area for legacy code
+
+## Backend Features
+
+- Execute SQL in exact mode (DuckDB, Postgres, MySQL)
+- Execute SQL in approximate mode for simple COUNT/SUM/AVG queries
+- Upload CSV and query it through DuckDB
+- Parse query plans for visualization
+- Compare plans with a structural similarity score
+- Lightweight in-memory cache for repeated query requests
+
+## Run
+
+1. Create and activate a virtual environment.
+2. Install dependencies:
+
+   pip install -r backend/requirements.txt
+
+3. Start API server from project root:
+
+   uvicorn backend.main:app --reload --app-dir aetherquery
+
+4. Open docs:
+
+   http://127.0.0.1:8000/docs
+
+## Core API
+
+- POST /api/upload
+- POST /api/execute
+- POST /api/plan
+- POST /api/optimize
+
+## Notes
+
+- DuckDB default file is at datasets/aetherquery.duckdb.
+- Postgres and MySQL connections are configured via environment variables.
